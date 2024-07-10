@@ -1,0 +1,172 @@
+TASK -1
+
+
+    NUMBER GUESSING GAME
+  
+
+    create a program that generates a random number and asks the user to guess it . provide feedback on whether the guess is too high or too low until the user guesses the correct number
+
+     
+       import random
+
+def guess_the_number():
+    # Generate a random number between 1 and 100
+    number_to_guess = random.randint(1, 100)
+    guessed_correctly = False
+
+    print("Welcome to the Number Guessing Game!")
+    print("I have picked a number between 1 and 100. Can you guess what it is?")
+
+    # Loop until the user guesses the correct number
+    while not guessed_correctly:
+        try:
+            # Ask the user to enter a guess
+            user_guess = int(input("Enter your guess: "))
+
+            # Check if the guess is too high, too low, or correct
+            if user_guess < number_to_guess:
+                print("Too low! Try again.")
+            elif user_guess > number_to_guess:
+                print("Too high! Try again.")
+            else:
+                print(f"Congratulations! You've guessed the correct number: {number_to_guess}")
+                guessed_correctly = True
+        except ValueError:
+            print("Invalid input. Please enter a valid number.")
+
+# Call the function to start the game
+guess_the_number()
+
+
+TASK -2
+
+
+
+SIMPLE CALCULATOR 
+
+
+
+   develop a calculator program that performs basic arithmetic operations such as addition , subraction ,multiplication, and division .allow the user to input two numbers and choose an operation to perform
+   
+
+     
+    def add(x, y):
+    return x + y
+
+def subtract(x, y):
+    return x - y
+
+def multiply(x, y):
+    return x * y
+
+def divide(x, y):
+    if y == 0:
+        return "Error! Division by zero."
+    else:
+        return x / y
+
+def calculator():
+    print("Welcome to the Basic Calculator!")
+    print("Select an operation:")
+    print("1. Addition")
+    print("2. Subtraction")
+    print("3. Multiplication")
+    print("4. Division")
+
+    while True:
+        try:
+            choice = int(input("Enter choice (1/2/3/4): "))
+
+            if choice in [1, 2, 3, 4]:
+                num1 = float(input("Enter the first number: "))
+                num2 = float(input("Enter the second number: "))
+
+                if choice == 1:
+                    print(f"The result is: {add(num1, num2)}")
+                elif choice == 2:
+                    print(f"The result is: {subtract(num1, num2)}")
+                elif choice == 3:
+                    print(f"The result is: {multiply(num1, num2)}")
+                elif choice == 4:
+                    print(f"The result is: {divide(num1, num2)}")
+                break
+            else:
+                print("Invalid input. Please enter a valid choice (1/2/3/4).")
+        except ValueError:
+            print("Invalid input. Please enter a number.")
+
+# Call the function to start the calculator
+calculator()
+
+
+
+
+
+TASK -3
+
+
+  TIC - TAC -TOE GAME
+
+
+    Build a simple console based Tic -Tac-Toe game that allows two players to play against each other
+
+
+
+      def print_board(board):
+    for row in board:
+        print(" | ".join(row))
+        print("-" * 5)
+
+def check_winner(board, player):
+    # Check rows, columns and diagonals for a win
+    for row in board:
+        if all([cell == player for cell in row]):
+            return True
+    for col in range(3):
+        if all([board[row][col] == player for row in range(3)]):
+            return True
+    if all([board[i][i] == player for i in range(3)]) or all([board[i][2 - i] == player for i in range(3)]):
+        return True
+    return False
+
+def is_draw(board):
+    return all([cell != " " for row in board for cell in row])
+
+def tic_tac_toe():
+    board = [[" " for _ in range(3)] for _ in range(3)]
+    players = ["X", "O"]
+    current_player = 0
+
+    print("Welcome to Tic-Tac-Toe!")
+    print_board(board)
+
+    while True:
+        print(f"Player {players[current_player]}'s turn.")
+        try:
+            row = int(input("Enter the row (0, 1, 2): "))
+            col = int(input("Enter the column (0, 1, 2): "))
+            
+            if board[row][col] != " ":
+                print("This cell is already taken. Choose another one.")
+                continue
+
+            board[row][col] = players[current_player]
+            print_board(board)
+
+            if check_winner(board, players[current_player]):
+                print(f"Player {players[current_player]} wins!")
+                break
+
+            if is_draw(board):
+                print("The game is a draw!")
+                break
+
+            current_player = 1 - current_player  # Switch player
+        except (ValueError, IndexError):
+            print("Invalid input. Please enter a valid row and column number (0, 1, 2).")
+
+# Call the function to start the game
+tic_tac_toe()
+
+
+    
